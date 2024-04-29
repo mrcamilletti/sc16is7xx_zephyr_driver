@@ -2,7 +2,7 @@ description: Opito SC16IS7xx I2C DUAL UART
 
 compatible: "nxp,sc16is7xx"
 
-include: [uart-controller.yaml, i2c-device.yaml]
+include: [uart-controller.yaml, i2c-device.yaml, pinctrl-device.yaml]
 
 properties:
     reg:

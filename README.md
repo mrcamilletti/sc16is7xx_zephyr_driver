@@ -7,19 +7,35 @@ It's a bit messy but hopefully will be enough to get you started, and you can co
 
 Add this to your overlay file
 
+&i2c0 {
+	status = "okay";
+
 	opito_uart:sc16is752@48 {
-		status = "okay";
 		compatible = "nxp,sc16is7xx";
-		reg-shift = < 3 >;
+		status = "okay";
+
 		reg = <0x48>;
-		current-speed = < 115200 >;
-		clock-frequency = < 14745600 >;
-		//parity = "odd"; 	//NRF9160 doesn't support ODD parity but the sc16is752 does.
-		interrupt-gpios = < &opito_header 19 (GPIO_ACTIVE_LOW)>;
-		num-ports = <2>; 
+		reg-shift = < 3 >;
+		num-ports = <2>; 		
+		clock-frequency = < 14745600 >;		
+		interrupt-gpios = < &opito_header 19 (GPIO_ACTIVE_LOW)>;		
 		serial-mode = "rs232";
 		config = <123>;
+
+		ext_uart0: ext_uart@0
+		{
+			current-speed = < 115200 >;
+			//parity = "odd"; 	//NRF9160 doesn't support ODD parity but the sc16is752 does.
+		}
+
+		ext_uart0: ext_uart@1
+		{
+			current-speed = < 9600 >;
+		}
 	};
+};
+
+	
 	
 	
 Then you can use the device as a normal UART like so, (add these functions to main.c or whatever)
