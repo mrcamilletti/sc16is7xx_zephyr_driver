@@ -19,18 +19,26 @@ Add this to your overlay file
 		num-ports = <2>; 		
 		clock-frequency = < 14745600 >;		
 		interrupt-gpios = < &opito_header 19 (GPIO_ACTIVE_LOW)>;		
-		serial-mode = "rs232";
-		config = <123>;
-
+		
 		ext_uart0: ext_uart@0
 		{
+			compatible = "nxp,sc16is7xx-serial";
+			reg = <0>;
+
 			current-speed = < 115200 >;
 			//parity = "odd"; 	//NRF9160 doesn't support ODD parity but the sc16is752 does.
+			serial-mode = "rs232";
+			config = <123>;
 		}
 
 		ext_uart0: ext_uart@1
 		{
+			compatible = "nxp,sc16is7xx-serial";
+			reg = <1>;
+
 			current-speed = < 9600 >;
+			serial-mode = "rs232";
+			config = <123>;
 		}
 	};
 };

@@ -2,7 +2,7 @@ description: Opito SC16IS7xx I2C DUAL UART
 
 compatible: "nxp,sc16is7xx"
 
-include: [i2c-device.yaml, pinctrl-device.yaml]
+include: [i2c-device.yaml]
 
 properties:
     reg:
@@ -24,6 +24,34 @@ properties:
       required: true
       description: |
         Number of serial ports on this device. 
+
+child-binding:
+    include: [uart-controller.yaml]
+
+    description: UART device over SC16IS7XX IC
+
+    properties:
+        reg:
+          required: true
+
+        spr:
+          type: int
+          required: false
+          description: |
+            Value of the SPR register
+
+        serial-mode:
+          required: false
+          type: string
+          description: |
+            Configures the GPIO for the electrical interface selected
+            Default to RS232 if not specified. This is only available on 
+            the Optio interface as we have wired on SP330E transceiver 
+            to the SC16IS752 GPIOs
+          enum:
+            - "rs232"
+            - "rs485"
+            - "rs422"
 
 
 
