@@ -31,6 +31,13 @@ child-binding:
     description: UART device over SC16IS7XX IC
 
     properties:
+        "#address-cells":
+            required: true
+            const: 1
+        "#size-cells":
+            required: true
+            const: 0
+
         reg:
           required: true
 
